@@ -1,8 +1,16 @@
-from fastapi import FastAPI, Depends, HTTPException
-from helpers.database import Base
+from fastapi import FastAPI
+from helpers.database import Base, engine
 
-from routes.IntentRoute import router as intent_router
+from routes import intent_router
+from routes import example_router
+# from routes import synonym_router
+# from routes import synonym_example_router
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 app.include_router(intent_router)
+app.include_router(example_router)
+# app.include_router(synonym_router)
+# app.include_router(synonym_example_router)
