@@ -1,1 +1,2 @@
-from .Intent import IntentCreate, IntentOut
+from .Intent import *
+from .IntentExample import *

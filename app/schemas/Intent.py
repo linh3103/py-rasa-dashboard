@@ -11,3 +11,6 @@ class IntentOut(IntentBase):
     id: int
     class Config:
         from_attributes = True
+
+class IntentUpdate(IntentBase):
+    pass
