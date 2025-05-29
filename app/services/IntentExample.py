@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models import IntentExample, Intent
+from app.models import IntentExample, Intent, EntityExample
 from app.schemas import IntentExampleCreate, IntentExampleUpdate
 from typing import Optional
 
@@ -28,7 +28,19 @@ def READ_ALL(db: Session):
         .join(IntentExample, IntentExample.intent_id == Intent.id)
         .all()
     )
-    return examples
+
+    result = []
+    for example in examples:
+        db_en_example = db.query(
+            EntityExample
+        ).filter(
+            example.id == EntityExample.example_id
+        ).all()
+        result.append(db_en_example)
+
+    print(result)
+
+    return result
 
 def READ_MANY(intentID: int, db: Session):
     examples = (

@@ -1,3 +1,18 @@
 version: "3.1"
 nlu:
+- intent: ask_price
+  examples: |
+  - Giá cái áo bao nhiêu
+  - Tôi muốn hỏi giá của cái thảm abc
 
+- intent: ask_promotion
+  examples: |
+  - Hiện đang có những chương trình khuyến mãi nào
+  - Có khuyến mãi không
+  - Khuyến mãi
+
+- intent: ask_sale
+  examples: |
+  - rèm cửa có giảm giá không?
+  - Áo gối giảm giá
+  - giảm giá 50%

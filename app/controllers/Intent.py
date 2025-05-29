@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from app.schemas import IntentCreate, IntentUpdate
 from app.services import CREATE, READ_ALL, UPDATE, DELETE
 from fastapi.responses import JSONResponse
+from app.schemas import IntentOut
 
 def create_intent(db: Session, intent: IntentCreate):
     return CREATE(intent, db)

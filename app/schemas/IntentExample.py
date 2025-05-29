@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from .EntityExample import EntityExampleRead
 
 class IntentExampleBase(BaseModel):
     intent_id:   int
@@ -20,7 +21,7 @@ class IntentExampleRead(BaseModel):
     intent_name: str
     example:     str
     description: str
-
+    entities:    list[EntityExampleRead] = []
     class Config:
         from_attributes = True
 
