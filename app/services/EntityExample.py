@@ -15,3 +15,11 @@ def CREATE(example: EntityExampleWrite, db: Session):
     db.commit()
     db.refresh(db_example)
     return db_example
+
+def DELETE(eeID: int, db: Session):
+    db_example = db.query(EntityExample).filter(eeID == EntityExample.id).first()
+    if db_example:
+        db.delete(db_example)
+        db.commit()
+        return True
+    return False

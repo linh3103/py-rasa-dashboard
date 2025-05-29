@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.helpers import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 from app.routes import *
 
