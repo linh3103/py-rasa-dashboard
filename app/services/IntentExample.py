@@ -40,7 +40,7 @@ def READ_ALL(db: Session):
 
     print(result)
 
-    return result
+    return examples
 
 def READ_MANY(intentID: int, db: Session):
     examples = (
