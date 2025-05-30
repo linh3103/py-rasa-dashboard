@@ -34,6 +34,7 @@ class EntityExample(Base):
     char_start = Column(Integer, nullable=False)
     char_end   = Column(Integer, nullable=False)
 
+    # Không được nhập trùng
     __table_args__ = (
         UniqueConstraint('entity_id', 'example_id', 'char_start', 'char_end'),
     )

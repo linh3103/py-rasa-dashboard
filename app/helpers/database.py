@@ -10,9 +10,9 @@ Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
-    print("session created")
+    # print("session created")
     try:
         yield db
     finally:
-        print("session closed")
+        # print("session closed")
         db.close()

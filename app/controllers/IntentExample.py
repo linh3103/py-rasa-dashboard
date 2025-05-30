@@ -7,7 +7,9 @@ def create_intent_expl(example: IntentExampleCreate, db: Session):
     return service.CREATE(example, db)
 
 def read_all_intent_expl(db: Session):
-    return service.READ_ALL(db)
+    intent_examples = service.READ_ALL(db)
+    # print("list: ", intent_examples)
+    return intent_examples
     
 def read_many_intent_expl(intentID: int, db: Session):
     return service.READ_MANY(intentID, db)

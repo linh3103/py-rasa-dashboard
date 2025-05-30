@@ -23,5 +23,5 @@ def updateEntityExample():
     print("update entity example")
 
 @router.delete("/{entityID}")
-def deleteEntityExample():
-    print("delete entity example")
+def deleteEntityExample(entityID: int, db: Session=Depends(get_db)):
+    return controller.delete_entity_example(entityID, db)

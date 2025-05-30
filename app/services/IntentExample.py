@@ -1,7 +1,9 @@
 from sqlalchemy.orm import Session
-from app.models import IntentExample, Intent, EntityExample
-from app.schemas import IntentExampleCreate, IntentExampleUpdate
+from app.models import IntentExample, Intent, EntityExample, Entity
+from app.schemas import IntentExampleCreate, IntentExampleUpdate, IntentExampleRead
+
 from typing import Optional
+from collections import defaultdict
 
 def CREATE(example: IntentExampleCreate, db: Session):
     db_example = IntentExample(
@@ -17,7 +19,7 @@ def CREATE(example: IntentExampleCreate, db: Session):
 
 
 def READ_ALL(db: Session):
-    examples = (
+    intent_examples = (
         db.query(
             IntentExample.id,
             IntentExample.intent_id,
@@ -29,21 +31,36 @@ def READ_ALL(db: Session):
         .all()
     )
 
+    entity_example_dict = defaultdict(list)
+    entity_examples = (
+        db.query(
+            EntityExample,
+            Entity.entity_name
+        )
+        .join(Entity)
+        .all()
+    )
+
+    for ee, entity_name in entity_examples:
+        ee.entity_name = entity_name
+        entity_example_dict[ee.example_id].append(ee)
+
     result = []
-    for example in examples:
-        db_en_example = db.query(
-            EntityExample
-        ).filter(
-            example.id == EntityExample.example_id
-        ).all()
-        result.append(db_en_example)
+    for ex in intent_examples:
+        ex_dict = {
+            "id": ex.id,
+            "intent_id": ex.intent_id,
+            "intent_name": ex.intent_name,
+            "example": ex.example,
+            "description": ex.description,
+            "entities": entity_example_dict.get(ex.id, [])
+        }
+        result.append(IntentExampleRead(**ex_dict))
 
-    print(result)
-
-    return examples
+    return result
 
 def READ_MANY(intentID: int, db: Session):
-    examples = (
+    intent_examples = (
         db.query(
             IntentExample.id,
             IntentExample.intent_id,
@@ -54,7 +71,35 @@ def READ_MANY(intentID: int, db: Session):
         .join(IntentExample, IntentExample.intent_id == Intent.id)
         .filter(IntentExample.intent_id == intentID)
     )
-    return examples
+
+
+    entity_example_dict = defaultdict(list)
+    entity_examples = (
+        db.query(
+            EntityExample,
+            Entity.entity_name
+        )
+        .join(Entity)
+        .all()
+    )
+
+    for ee, entity_name in entity_examples:
+        ee.entity_name = entity_name
+        entity_example_dict[ee.example_id].append(ee)
+
+    result = []
+    for ex in intent_examples:
+        ex_dict = {
+            "id": ex.id,
+            "intent_id": ex.intent_id,
+            "intent_name": ex.intent_name,
+            "example": ex.example,
+            "description": ex.description,
+            "entities": entity_example_dict.get(ex.id, [])
+        }
+        result.append(IntentExampleRead(**ex_dict))
+
+    return result
 
 def UPDATE(exampleID: int, example: IntentExampleUpdate, db: Session):
     db_example = db.query(IntentExample).filter(exampleID == IntentExample.id).first()

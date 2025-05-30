@@ -2,7 +2,7 @@ version: "3.1"
 nlu:
 - intent: ask_price
   examples: |
-  - Giá cái áo bao nhiêu
+  - [Giá]{"entity": "price", "value": ""} [cái]{"entity": "price", "value": ""} áo bao nhiêu
   - Tôi muốn hỏi giá của cái thảm abc
 
 - intent: ask_promotion
