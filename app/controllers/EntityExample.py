@@ -7,3 +7,6 @@ def create_entity_example(example: EntityExampleWrite, db: Session):
 
 def delete_entity_example(eeID: int, db: Session):
     return service.DELETE(eeID, db)
+
+def update_entity_example(eeID: int, ee: EntityExampleWrite, db: Session):
+    return service.UPDATE(eeID, ee, db)

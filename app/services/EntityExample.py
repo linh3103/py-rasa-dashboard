@@ -16,6 +16,20 @@ def CREATE(example: EntityExampleWrite, db: Session):
     db.refresh(db_example)
     return db_example
 
+def READ_ALL(db: Session):
+    return db.query(EntityExample).all()
+
+def UPDATE(eeID: int, ee: EntityExampleWrite, db: Session):
+    db_example = db.query(EntityExample).filter(eeID == EntityExample.id).first()
+    if db_example:
+        db_example.entity_id  = ee.entity_id,
+        db_example.role       = ee.role,
+        db_example.value      = ee.value
+        db.commit()
+        db.refresh(db_example)
+        return db_example
+    return None
+
 def DELETE(eeID: int, db: Session):
     db_example = db.query(EntityExample).filter(eeID == EntityExample.id).first()
     if db_example:
