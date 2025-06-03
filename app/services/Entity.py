@@ -18,6 +18,9 @@ def CREATE(entity: EntityCreate, db: Session):
 def READ_ALL(db: Session):
     return db.query(Entity).all()
 
+def READ_ONE(id: int, db: Session):
+    return db.query(Entity).filter(Entity.id == id).first()
+
 def UPDATE(entityID: int, entity: EntityCreate, db: Session):
     db_entity = db.query(Entity).filter(entityID == Entity.id).first()
     if db_entity:

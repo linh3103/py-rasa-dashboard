@@ -22,3 +22,7 @@ def updateIntent(intentID: int, intent: IntentUpdate, db: Session = Depends(get_
 def deleteIntent(intentID: int, db: Session=Depends(get_db)):
     return controller.delete_intent(intentID, db)
 
+@router.get("/export")
+def exportIntents(db: Session = Depends(get_db)):
+    return controller.export_intents(db)
+

@@ -1,0 +1,4 @@
+intents:
+  - ask_price
+  - ask_promotion
+  - ask_sale

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, UniqueConstraint, Boolean
 from app.helpers import Base
 
 class Intent(Base):
@@ -38,3 +38,15 @@ class EntityExample(Base):
     __table_args__ = (
         UniqueConstraint('entity_id', 'example_id', 'char_start', 'char_end'),
     )
+
+class Slot(Base):
+    __tablename__ = "slots"
+
+    id                     = Column(Integer, primary_key=True, index=True)
+    name                   = Column(String(100), unique=True, nullable=False) 
+    type                   = Column(String(50), nullable=False, default="text")          
+    auto_fill              = Column(Boolean, default=True)
+    entity_name            = Column(String(100), nullable=False, default="")
+    initial_value          = Column(Text, nullable=True)
+    influence_conversation = Column(Boolean, default=True)   
+    description            = Column(Text, nullable=True)

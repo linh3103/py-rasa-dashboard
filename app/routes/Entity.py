@@ -21,3 +21,8 @@ def updateEntity(entityID: int, entity: EntityCreate, db: Session = Depends(get_
 @router.delete("/{entityID}")
 def deleteEntity(entityID: int, db: Session = Depends(get_db)):
     return controller.delete_entity(entityID, db)
+
+
+@router.get("/export")
+def exportEntities(db: Session = Depends(get_db)):
+    return controller.export_entities(db)
