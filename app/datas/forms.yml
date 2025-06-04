@@ -1,0 +1,16 @@
+forms:
+  order_product:
+    required_slots:
+      - product_name
+      - size
+      - color
+      - count
+      - user_name
+      - address
+      - phone_number
+  register:
+    required_slots:
+      - user_name
+      - gender
+      - birth_day
+      - password

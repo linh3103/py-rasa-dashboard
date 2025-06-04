@@ -1,0 +1,29 @@
+responses:
+  utter_ask_product_name:
+    - text: 
+  utter_ask_size:
+    - text: 
+  utter_ask_color:
+    - text: 
+  utter_ask_count:
+    - text: 
+  utter_ask_user_name:
+    - text: 
+  utter_ask_address:
+    - text: 
+  utter_ask_phone_number:
+    - text: 
+  utter_ask_gender:
+    - text: 
+  utter_ask_birth_day:
+    - text: 
+  utter_ask_password:
+    - text: 
+  utter_ask_discount:
+    - text: 
+  utter_ask_brand:
+    - text: 
+  utter_ask_price:
+    - text: 
+  utter_ask_product_cd:
+    - text: 

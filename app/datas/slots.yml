@@ -1,0 +1,151 @@
+slots:
+  product_name:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: product_name
+
+      - type: from_entity
+        entity: product_name
+        conditions:
+          - active_loop: order_product
+            requested_slot: product_name
+
+  size:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: size
+
+      - type: from_entity
+        entity: size
+        conditions:
+          - active_loop: order_product
+            requested_slot: size
+
+  color:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: color
+
+      - type: from_entity
+        entity: color
+        conditions:
+          - active_loop: order_product
+            requested_slot: color
+
+  count:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: count
+
+      - type: from_entity
+        entity: count
+        conditions:
+          - active_loop: order_product
+            requested_slot: count
+
+  user_name:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: user_name
+          - active_loop: register
+            requested_slot: user_name
+
+      - type: from_entity
+        entity: user_name
+        conditions:
+          - active_loop: order_product
+            requested_slot: user_name
+          - active_loop: register
+            requested_slot: user_name
+
+  address:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: address
+
+      - type: from_entity
+        entity: address
+        conditions:
+          - active_loop: order_product
+            requested_slot: address
+
+  phone_number:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: order_product
+            requested_slot: phone_number
+
+      - type: from_entity
+        entity: phone_number
+        conditions:
+          - active_loop: order_product
+            requested_slot: phone_number
+
+  gender:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: register
+            requested_slot: gender
+
+  birth_day:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: register
+            requested_slot: birth_day
+
+  password:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: register
+            requested_slot: password
+
+  discount:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: discount
+        
+  brand:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: brand
+        
+  price:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: price
+        
+  product_cd:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: product_cd
+        

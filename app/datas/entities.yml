@@ -4,3 +4,9 @@ entities:
   - brand
   - size
   - price
+  - product_name
+  - product_cd
+  - count
+  - address
+  - phone_number
+  - user_name

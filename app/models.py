@@ -50,3 +50,12 @@ class Slot(Base):
     initial_value          = Column(Text, nullable=True)
     influence_conversation = Column(Boolean, default=True)   
     description            = Column(Text, nullable=True)
+
+
+class Form(Base):
+    __tablename__ = "forms"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    form_name = Column(String(100), unique=True, nullable=False)
+    fields = Column(Text, nullable=False)
+    description = Column(Text, nullable=False, default="")

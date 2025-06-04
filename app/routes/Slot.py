@@ -29,3 +29,7 @@ def updateSlot(slot_id: int, slot: SlotWrite, db: Session = Depends(get_db)):
 @router.delete("/{slot_id}")
 def deleteSlot(slot_id: int, db: Session = Depends(get_db)):
     return controller.delete_slot(slot_id, db)
+
+@router.get("/export")
+def exportSlots(db: Session = Depends(get_db)):
+    return controller.export_slots(db)
