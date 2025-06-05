@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, UniqueConstraint, Boolean
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, UniqueConstraint, DateTime, func
 from app.helpers import Base
 
 class Intent(Base):
@@ -39,19 +40,6 @@ class EntityExample(Base):
         UniqueConstraint('entity_id', 'example_id', 'char_start', 'char_end'),
     )
 
-class Slot(Base):
-    __tablename__ = "slots"
-
-    id                     = Column(Integer, primary_key=True, index=True)
-    name                   = Column(String(100), unique=True, nullable=False) 
-    type                   = Column(String(50), nullable=False, default="text")          
-    auto_fill              = Column(Boolean, default=True)
-    entity_name            = Column(String(100), nullable=False, default="")
-    initial_value          = Column(Text, nullable=True)
-    influence_conversation = Column(Boolean, default=True)   
-    description            = Column(Text, nullable=True)
-
-
 class Form(Base):
     __tablename__ = "forms"
 
@@ -59,3 +47,30 @@ class Form(Base):
     form_name = Column(String(100), unique=True, nullable=False)
     fields = Column(Text, nullable=False)
     description = Column(Text, nullable=False, default="")
+
+
+class Warehouse(Base):
+    __tablename__ = "warehouse"
+
+    product_code = Column(String(50), primary_key=True)
+    product_name = Column(String(100), unique=True, nullable=False)
+    quantity = Column(Integer, default=0, nullable=False)
+    unit = Column(String(50), default="Cái", nullable=False)
+
+class WarehouseEntry(Base):
+    __tablename__ = "warehouse_entry"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    product_code = Column(String(50), ForeignKey(Warehouse.product_code), nullable=False)
+    quantity_entry = Column(Integer, default=0, nullable=False)
+    quantity_remaining = Column(Integer, default=0, nullable=False)
+    entry_date = Column(DateTime, server_default=func.now(), nullable=False)
+
+class ExportInvoice(Base):
+    __tablename__ = "export_invoice"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    product_code = Column(String(50), ForeignKey("warehouse.product_code"), nullable=False)
+    quantity = Column(Integer, nullable=False)
+    export_date = Column(DateTime, server_default=func.now(), nullable=False)
+    note = Column(Text, default="", nullable=True)
